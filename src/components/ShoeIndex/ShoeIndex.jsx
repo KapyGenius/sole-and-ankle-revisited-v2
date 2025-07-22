@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { WEIGHTS } from '../../constants';
+import { WEIGHTS, QUERIES } from '../../constants';
 
 import Breadcrumbs from '../Breadcrumbs';
 import Select from '../Select';
@@ -15,14 +15,16 @@ const ShoeIndex = ({ sortId, setSortId }) => {
       <MainColumn>
         <Header>
           <Title>Running</Title>
-          <Select
-            label="Sort"
-            value={sortId}
-            onChange={(ev) => setSortId(ev.target.value)}
-          >
-            <option value="newest">Newest Releases</option>
-            <option value="price">Price</option>
-          </Select>
+          <RemoveMobile>
+            <Select
+              label="Sort"
+              value={sortId}
+              onChange={(ev) => setSortId(ev.target.value)}
+            >
+              <option value="newest">Newest Releases</option>
+              <option value="price">Price</option>
+            </Select>
+          </RemoveMobile>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
@@ -35,7 +37,9 @@ const ShoeIndex = ({ sortId, setSortId }) => {
             Shoes
           </Breadcrumbs.Crumb>
         </Breadcrumbs>
-        <Spacer size={42} />
+        <RemoveTable>
+          <Spacer size={42} />
+        </RemoveTable>
         <ShoeSidebar />
       </LeftColumn>
     </Wrapper>
@@ -44,13 +48,20 @@ const ShoeIndex = ({ sortId, setSortId }) => {
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column-reverse;
   align-items: baseline;
-  gap: 32px;
+  gap: 8px;
+  @media ${QUERIES.laptopAndUp} {
+   flex-direction: row-reverse;
+   gap: 32px;
+  }
 `;
 
 const LeftColumn = styled.div`
-  flex-basis: 248px;
+  flex-basis: 0px;
+  @media ${QUERIES.laptopAndUp} {
+    flex-basis: 248px;
+  }
 `;
 
 const MainColumn = styled.div`
@@ -66,6 +77,20 @@ const Header = styled.header`
 const Title = styled.h2`
   font-size: 1.5rem;
   font-weight: ${WEIGHTS.medium};
+`;
+
+const RemoveMobile = styled.div`
+  display: none;
+  @media ${QUERIES.tabletAndUp} {
+    display: revert;
+  }
+`;
+
+const RemoveTable = styled.div`
+  display: none;
+  @media ${QUERIES.laptopAndUp} {
+    display: revert;
+  }
 `;
 
 export default ShoeIndex;

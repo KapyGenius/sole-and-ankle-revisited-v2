@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import { COLORS, WEIGHTS, QUERIES } from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
+import UnstyledButton from '../UnstyledButton';
+import Icon from '../Icon';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -28,7 +30,24 @@ const Header = () => {
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/sale">Sale</NavLink>
+          <NavLink href="/new">New&nbsp;Releases</NavLink>
+          <NavLink href="/men">Men</NavLink>
+          <NavLink href="/women">Women</NavLink>
+          <NavLink href="/kids">Kids</NavLink>
+          <NavLink href="/collections">Collections</NavLink>
         </Nav>
+        <NavButtons>
+        <UnstyledButton>
+          <Icon id="shopping-bag" strokeWidth={1} />
+        </UnstyledButton>
+        <UnstyledButton>
+          <Icon id="search" strokeWidth={1} />
+        </UnstyledButton>
+        <UnstyledButton onClick={() => setShowMobileMenu(!showMobileMenu)}>
+          <Icon id="menu" strokeWidth={1} />
+        </UnstyledButton>
+        </NavButtons>
         <Side />
       </MainHeader>
 
@@ -49,13 +68,30 @@ const MainHeader = styled.div`
 `;
 
 const Nav = styled.nav`
-  display: flex;
-  gap: 48px;
-  margin: 0px 48px;
+  display: none;
+  @media ${QUERIES.MobileMenu} { 
+    display: flex;
+    gap: clamp(16px, 2vw ,48px);
+    margin: 0px 48px;
+    padding-bottom: 10px;
+    overflow: scroll;
+  }
 `;
 
+const NavButtons = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  @media ${QUERIES.laptopAndUp} {
+    display: none;
+  }
+`
+
 const Side = styled.div`
-  flex: 1;
+  flex: 0;
+  @media ${QUERIES.laptopAndUp} {
+    flex: 1;
+  }
 `;
 
 const NavLink = styled.a`
