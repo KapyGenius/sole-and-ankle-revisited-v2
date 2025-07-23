@@ -53,7 +53,7 @@ const Header = () => {
 
       <MobileMenu
         isOpen={showMobileMenu}
-        onDismiss={() => setShowMobileMenu(false)}
+        onOpenChange={(open) => setShowMobileMenu(open)}
       />
     </header>
   );
