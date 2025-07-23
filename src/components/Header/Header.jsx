@@ -69,7 +69,7 @@ const MainHeader = styled.div`
 
 const Nav = styled.nav`
   display: none;
-  @media ${QUERIES.MobileMenu} { 
+  @media ${QUERIES.laptopAndUp} { 
     display: flex;
     gap: clamp(16px, 2vw ,48px);
     margin: 0px 48px;
